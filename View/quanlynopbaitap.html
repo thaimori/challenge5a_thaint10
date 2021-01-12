@@ -1,0 +1,29 @@
+
+
+<h2>Danh sach nop bai tap</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>User Name</th>
+            <th>Full Name</th>
+            <th>File bai tap</th>
+            <th>Thoi gian nop</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <?php
+        if ($danhsach!="") {
+        while ($row = $danhsach->fetch_assoc()) {
+        echo "<tr>";
+        echo "<td>" . $row["username"] . "</td><td>" . $row["fullname"] . "</td><td><a href='".$row["filenopbaitap"]."'>" . $row["filenopbaitap"] . "</a></td><td>Nop ngay: ". $row["ngaynop"]."</td></tr>";
+        }
+        }
+
+        ?>
+    </tbody>
+</table>
+
+
+

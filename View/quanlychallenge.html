@@ -1,0 +1,70 @@
+
+<?php 
+if (isset($_SESSION['permission']))
+{
+
+if ($_SESSION['permission']==1)
+{
+
+
+?>
+
+<div>
+    <h2>Tao challenge</h2>    
+    <form action="quanlychallenge.php" method="post" enctype="multipart/form-data">
+
+        <div class="form-group">
+
+            <label for="fileToUpload">Chon file:</label>
+            <input type="file" class="form-control" name="fileToUpload" id="fileToUpload">
+
+        </div>
+        <div class="form-group">
+            <label for="goiy">Goi y</label>
+            <textarea class="form-control" name="goiy"></textarea>
+        </div>
+        
+        <input type="submit" class="btn btn-primary" value="Submit" name="submitUpbai">
+    </form>  
+</div>
+
+<?php
+}
+}
+?>
+
+
+<h2>Danh sach challenge</h2>
+
+<form action="../Controller/quanlychallenge.php" method="post">
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Goi y</th>
+            <th>Dap an</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <?php
+        if ($allChallenge!="") {
+        
+        while ($row = $allChallenge->fetch_assoc()) {
+        echo "<input type='hidden' name='challenge_id' value='";
+        echo $row['challenge_id'];
+        echo "'<tr>";
+        echo "<td>" . $row["challenge_id"] . "</td><td>" . $row["goiy"] . "</td><td>";
+        echo "<input type='text' class='form-control' name='dapan'><button type='submit' class='btn btn-primary'>Submit</button></td></tr>";
+
+        }
+        
+        }
+
+        ?>
+    </tbody>
+</table>
+</form>
+
+
+

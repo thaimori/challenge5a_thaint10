@@ -1,0 +1,93 @@
+
+<?php 
+if (isset($_SESSION['permission']))
+{
+
+if ($_SESSION['permission']==1)
+{
+
+
+?>
+
+<div>
+    <h2>Upload bai tap</h2>    
+    <form action="quanlybaitap.php" method="post" enctype="multipart/form-data">
+
+
+        <div class="form-group">
+            <label for="tenbaitap">Ten bai tap</label>
+            <input type="text" class="form-control" name="tenbaitap" placeholder="Tem bai tap" required>
+        </div>
+        <div class="form-group">
+
+            <label for="fileToUpload">Chon file:</label>
+            <input type="file" class="form-control" name="fileToUpload" id="fileToUpload">
+
+        </div>
+        <input type="submit" class="btn btn-primary" value="Upload bai tap" name="submitUpbai">
+    </form>  
+</div>
+
+<?php
+}
+}
+?>
+
+
+<h2>Danh sach bai tap</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>File</th>
+            <th>Nguoi tao</th>
+            <th>Ten bai tap</th>
+            <th>Ngay tao</th>
+            <?php if ($_SESSION['permission']!=1)
+            {
+
+            echo "<th>Thoi gian nop</th><th>Xu ly</th>";
+            }
+            ?>
+        </tr>
+    </thead>
+    <tbody>
+
+        <?php
+
+        echo "<form action='quanlybaitap.php' method='post' enctype='multipart/form-data'>";
+        if ($allBaitap!="") {
+        while ($row = $allBaitap->fetch_assoc()) {
+        if ($_SESSION['permission']==1){
+        echo "<tr>";
+        echo "<td><input type='hidden' name='baitap_id' value=". $row["baitap_id"] ."><a href='quanlybaitap.php?btid=".$row["baitap_id"]."'>" . $row["baitap_id"] . "</a></td><td><a href='".$row["tenbaitap"]."'>" . $row["tenbaitap"] . "</a></td><td>" . $row["user_id"] . "</td><td>" . $row["filename"] . "</td><td>" . $row["ngaytao"] . "</td>";
+        echo "</tr>";
+        }else{
+        echo "<tr>";
+        echo "<td><input type='hidden' name='baitap_id' value=". $row["baitap_id"] .">" . $row["baitap_id"] . "</td><td><a href='".$row["tenbaitap"]."'>" . $row["tenbaitap"] . "</a></td><td>" . $row["user_id"] . "</td><td>" . $row["filename"] . "</td><td>" . $row["ngaytao"] . "</td>";
+
+        if ($allNopBaitap!="") {
+        while ($row2 = $allNopBaitap->fetch_assoc()) {
+        if ($row["baitap_id"]==$row2["baitap_id"]){
+        echo "<td><a href='".$row2["filenopbaitap"]."'>" . $row2["filenopbaitap"] . "</a> <br>Nop ngay: ". $row2["ngaynop"]."</td>";
+        }
+
+
+
+
+        }
+        }
+        echo"<td></td><td><input type='file' name='filenop' id='filenop' /><button type='submit' value='SAVE' name='submitNopbai'>Save</button></td>";
+        echo "</tr>";
+        }
+        }
+        }
+        echo "</form>";
+
+        ?>
+    </tbody>
+</table>
+
+
+

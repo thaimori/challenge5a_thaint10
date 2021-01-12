@@ -1,0 +1,44 @@
+
+<?php while ($row = $allUser->fetch_assoc()) { 
+?>
+<form action="../Controller/quanlyuser.php" method="post">
+    <h2>Thong tin user</h2>
+
+    <div class="container">
+
+
+
+        <input type="hidden" name="uid" value="<?php echo $_GET['uid'] ?>" />
+        <div class="form-group">
+            <label for="uname">User Name</label>
+            <input type="text" class="form-control" name="uname" value="<?php echo $row['username'] ?>" disabled>
+        </div>
+        <div class="form-group">
+            <label for="fname">Full Name</label>
+            <input type="text" class="form-control" name="fname" value="<?php echo $row['fullname'] ?>" disabled>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" name="email" value="<?php echo $row['email'] ?>" disabled>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="text" class="form-control" name="phone" value="<?php echo $row['phone'] ?>" disabled>
+        </div>
+
+    </div>
+    <h2>De lai loi nhan</h2>
+    <div class="container">
+
+        <div class="form-group">
+            <label for="comment">Comment</label>
+            <textarea class="form-control" name="comment"><?php echo $comment ?></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+<?php
+
+}
+?>
