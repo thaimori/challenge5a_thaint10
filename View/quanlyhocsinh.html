@@ -1,0 +1,30 @@
+
+<h2>Danh sach hoc sinh</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Fullname</th>
+            <th>Password</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Comment</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <?php
+
+
+        while ($row = $allUser->fetch_assoc()) {
+
+        echo "<tr><td><a href='quanlyhocsinh.php?uid=".$row["user_id"]."'>" . $row["user_id"] . "</a></td><td>" . $row["username"] . "</td><td>" . $row["fullname"] . "</td><td>" . $row["password"] . "</td><td>" . $row["phone"] . "</td><td>" . $row["email"] . "</td><td>" . $row["comment"] . "</td></tr>";
+        }
+
+        ?>
+    </tbody>
+</table>
+
+

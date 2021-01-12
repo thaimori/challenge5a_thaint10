@@ -1,0 +1,31 @@
+
+<?php while ($row = $allUser->fetch_assoc()) { 
+?>
+        <form action="../Controller/quanlyhocsinh.php" method="post">
+
+
+            <div class="container">
+                <input type="hidden" name="uid" value="<?php echo $_GET['uid'] ?>" />
+                <label for="uname"><b>User Name</b></label>
+                <input type="text" value="<?php echo $row['username'] ?>" name="uname" required><br><br>
+
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required><br><br>
+                
+                <label for="psw2"><b>Retype Password</b></label>
+                <input type="password" placeholder="ReEnter Password" name="psw2" required><br><br>
+                
+                <label for="fname"><b>Full Name</b></label>
+                <input type="text" value="<?php echo $row['fullname'] ?>"  name="fname" required><br><br>
+                <label for="fname"><b>Email</b></label>
+                <input type="email" value="<?php echo $row['email'] ?>"  name="email" required><br><br>
+                <label for="fname"><b>Phone</b></label>
+                <input type="text" value="<?php echo $row['phone'] ?>"  name="phone" required><br><br>
+                <textarea  name="comment" placeholder="Enter Comment"><?php echo $row['comment'] ?></textarea><br><br>
+                <button type="submit">Update</button>
+            </div>
+        </form>
+<?php
+
+}
+?>

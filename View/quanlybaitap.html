@@ -1,0 +1,72 @@
+
+<?php 
+if (isset($_SESSION['permission']))
+{
+
+if ($_SESSION['permission']==1)
+{
+
+
+?>
+
+<div>
+    <h2>Upload bai tap</h2>    
+    <form action="quanlybaitap.php" method="post" enctype="multipart/form-data">
+        <label for="tenbaitap"><b>Ten bai tap</b></label>
+        <input type="text" placeholder="Ten bai tap" name="tenbaitap" required><br><br>
+        Chon file:
+        <input type="file" name="fileToUpload" id="fileToUpload"><br><br>
+        <input type="submit" value="Upload bai tap" name="submitUpbai">
+    </form>  
+</div>
+
+<?php
+}
+}
+?>
+
+
+<h2>Danh sach bai tap</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>File</th>
+            <th>Nguoi tao</th>
+            <th>Ten bai tap</th>
+            <th>Ngay tao</th>
+            <th>Thoi gian nop</th>
+            <th>Xu ly</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <?php
+        if ($allBaitap!="") {
+
+        while ($row = $allBaitap->fetch_assoc()) {
+
+        echo "<tr>";
+        echo "<form action='quanlybaitap.php' method='post' enctype='multipart/form-data'>";
+        echo "<td><input type='hidden' name='baitap_id' value=". $row["baitap_id"] .">" . $row["baitap_id"] . "</td><td><a href='".$row["tenbaitap"]."'>" . $row["tenbaitap"] . "</a></td><td>" . $row["user_id"] . "</td><td>" . $row["filename"] . "</td><td>" . $row["ngaytao"] . "</td><td>";
+        while ($row_nopbaitap = $allNopBaitap->fetch_assoc()) {
+            if ($row["baitap_id"]=$row_nopbaitap["baitap_id"])
+            {
+            echo "<a href='".$row_nopbaitap["filenopbaitap"]."'>" . $row_nopbaitap["filenopbaitap"] . "</a> <br>Nop ngay: ". $row_nopbaitap["ngaynop"];
+            
+            }
+        }
+        echo"</td><td><input type='file' name='filenop' id='filenop' /><button type='submit' value='SAVE' name='submitNopbai'>Save</button></td></form></tr>";
+        }
+        } else {
+        echo "No data";
+
+        }
+
+        ?>
+    </tbody>
+</table>
+
+
+
